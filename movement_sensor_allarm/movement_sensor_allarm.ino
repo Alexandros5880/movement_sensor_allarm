@@ -58,7 +58,7 @@ void loop() {
     long startTime = millis();
     while ( (millis()-startTime) <= 3000 );
   }
-  
+  /*
   // If movment sensor gets movement
   else if ( mov ) {
     bip(); // Bip Functio every time sensor see movement bip function is enable
@@ -76,7 +76,7 @@ void loop() {
       while ( (millis()-startTime) <= 3000 );
     }
   } 
-
+  */
   // OFF
   else {
     counter = 0;
