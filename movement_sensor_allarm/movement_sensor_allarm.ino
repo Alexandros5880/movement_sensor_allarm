@@ -45,7 +45,7 @@ void loop() {
 
   
   // Read sensor
-  int mov = digitalRead( move_pin );
+  //int mov = digitalRead( move_pin );
   boolean dist = ultra_sonic();
 
   // Ultrasonic Sensor
@@ -113,7 +113,7 @@ int ultra_sonic() {
   // Calculating the distance
   int distance = (duration*0.034)/2;
   //Serial.println("Distance: " + String(distance) + "  Last: " + String(distance_last));
-  if ( (distance >= distance_last+200) || (distance <= distance_last-200)  ) {
+  if ( (distance >= distance_last+50) || (distance <= distance_last-50)  ) {
     distance_last = distance;
     return 1;
   } else {
