@@ -2,8 +2,6 @@
 #define bip_pin 4
 #define move_pin 3
 #define led_pin 13
-#define trigPin 5
-#define echoPin 6
 
 
 
@@ -31,36 +29,20 @@ void setup() {
   pinMode(led_pin, OUTPUT);
   Serial.begin(9600);
   // Rele ON
-  digitalWrite(switch_pin, HIGH);
-  // Ultra Sonic
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
+  digitalWrite(switch_pin, LOW);
 }
 
 
 
 
+
 void loop() {
-
-
   
   // Read sensor
-  //int mov = digitalRead( move_pin );
-  boolean dist = ultra_sonic();
-
-  // Ultrasonic Sensor
-  if (dist) {
-    counter = 0;
-    digitalWrite(bip_pin, HIGH);
-    Serial.println("Ultrasonic Sensor Alarm ON");
-    digitalWrite(switch_pin, LOW);
-    digitalWrite(led_pin, HIGH);
-    long startTime = millis();
-    while ( (millis()-startTime) <= 3000 );
-  }
-  /*
+  int mov = digitalRead( move_pin );
+  
   // If movment sensor gets movement
-  else if ( mov ) {
+  if ( mov ) {
     bip(); // Bip Functio every time sensor see movement bip function is enable
     if ( (millis()-previusTime_main) >= 1000 ) {
       previusTime_main = millis();
@@ -76,51 +58,21 @@ void loop() {
       while ( (millis()-startTime) <= 3000 );
     }
   } 
-  */
+  
   // OFF
   else {
     counter = 0;
-    digitalWrite(trigPin, HIGH);
     digitalWrite(switch_pin, HIGH);
     digitalWrite(bip_pin, LOW);
     digitalWrite(led_pin, LOW);
   }
   
-  
 }
 
 
 
 
 
-
-
-
-// Ultra sonic function
-int distance_last = 0;
-
-int ultra_sonic() {
-  // Clears the trigPin
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  // Sets the trigPin on HIGH state for 10 micro seconds
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  // Reads the echoPin, returns the sound wave travel time in microseconds
-  long duration = pulseIn(echoPin, HIGH);
-  //Serial.println("Duration: " + String(duration));
-  // Calculating the distance
-  int distance = (duration*0.034)/2;
-  //Serial.println("Distance: " + String(distance) + "  Last: " + String(distance_last));
-  if ( (distance >= distance_last+50) || (distance <= distance_last-50)  ) {
-    distance_last = distance;
-    return 1;
-  } else {
-    return 0;
-  }
-
-}
 
 
 
