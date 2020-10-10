@@ -15,10 +15,6 @@ int counter = 0;
 void bip();
 
 
-// Ultra sonic function
-int ultra_sonic();
-
-
 
 
 
